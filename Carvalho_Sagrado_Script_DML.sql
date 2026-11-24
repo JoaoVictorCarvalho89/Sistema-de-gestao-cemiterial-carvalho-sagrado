@@ -54,13 +54,13 @@ VALUES
     (4, 'Exumação e Manutenção de Ossuário', 'Procedimento legal de exumação e transferência para ossuário.', 950.00),
     (5, 'Manutenção e Jardinagem Anual de Jazigo', 'Limpeza mensal, poda de grama e conservação de lápide por 12 meses.', 450.00);
 
-INSERT INTO Produto (idProduto, nome, preco, categoria)
+INSERT INTO Produto (idProduto, nome, preco, idCategoria)
 VALUES
-    (1, 'Urna Funerária de Madeira Nobre (Carvalho)', 3500.00, 'Urnas'),
-    (2, 'Urna Funerária Ecológica Biodegradável', 2200.00, 'Urnas'),
-    (3, 'Coroa de Flores Naturais Premium', 450.00, 'Ornamentação'),
-    (4, 'Placa Memorial em Bronze Personalizada', 850.00, 'Memoriais'),
-    (5, 'Lápide em Mármore Polido', 1800.00, 'Memoriais');
+    (1, 'Urna Funerária de Madeira Nobre (Carvalho)', 3500.00, 1), -- Categoria: Urnas
+    (2, 'Urna Funerária Ecológica Biodegradável', 2200.00, 1),    -- Categoria: Urnas
+    (3, 'Coroa de Flores Naturais Premium', 450.00, 2),            -- Categoria: Ornamentação
+    (4, 'Placa Memorial em Bronze Personalizada', 850.00, 3),     -- Categoria: Memoriais
+    (5, 'Lápide em Mármore Polido', 1800.00, 3);                  -- Categoria: Memoriais
 
 -- =========================================================================
 -- Cenário 3 — Cadastro de Clientes Titulares e Registro de Óbitos:
@@ -143,3 +143,17 @@ VALUES
 INSERT INTO Execucao (idFuncionario, idServico, data_execucao, duracao)
 VALUES
     (2, 6, '2026-07-16', '01:00:00'); -- Beatriz (Atendente Comercial) realizou a ativação e integração web do perfil na plataforma EternumAI
+
+-- =========================================================================
+-- Cenário 7 — Para gerenciar melhor as categorias de produtos visando possíveis
+-- alterações e adições de novas categorias para produtos, inserimos novas linhas 
+-- referentes às categorias já existentes na nova tabela
+-- =========================================================================
+
+INSERT INTO Categoria (idCategoria, nome, descricao, data_criacao)
+VALUES
+    (1, 'Urnas', 'Urnas funerárias em madeiras nobres, ecológicas e modelos especiais.', '2026-02-01'),
+    (2, 'Ornamentação', 'Coroas de flores naturais, arranjos florais e itens de decoração para velório.', '2026-02-01'),
+    (3, 'Memoriais', 'Placas comemorativas em bronze, lápides em mármore e itens de identificação permanente.', '2026-02-01'),
+    (4, 'Velas e Paramentos', 'Velas votivas, castiçais e artigos religiosos para cerimônias e homenagens.', '2026-02-05'),
+    (5, 'Jardinagem e Conservação', 'Vasos, insumos e itens de manutenção estética para jazigos e túmulos.', '2026-02-05');
