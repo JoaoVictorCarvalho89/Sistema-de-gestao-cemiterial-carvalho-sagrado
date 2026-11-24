@@ -10,7 +10,7 @@ CREATE DATABASE IF NOT EXISTS CemiterioCarvalhoSagradoDB;
 USE CemiterioCarvalhoSagradoDB; -- Seleciona o banco de dados CemiterioCarvalhoSagradoDB para criação de tabelas
 
 -- =========================================================================
--- 1. TABELA UNIDADE REGIONAL (Entidade Forte)
+--  TABELA UNIDADE REGIONAL (Entidade Forte)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS UnidadeRegional (
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS UnidadeRegional (
 );
 
 -- =========================================================================
--- 2. TABELA CLIENTE (Entidade Forte - Identificada por ID)
+--  TABELA CLIENTE (Entidade Forte - Identificada por ID)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Cliente (
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Cliente (
 );
 
 -- =========================================================================
--- 3. TABELA FUNCIONÁRIO (Lado N da Unidade Regional)
+--  TABELA FUNCIONÁRIO (Lado N da Unidade Regional)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Funcionario (
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS Funcionario (
 );
 
 -- =========================================================================
--- 4. TABELA SERVIÇO (Entidade Forte)
+--  TABELA SERVIÇO (Entidade Forte)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Servico (
@@ -66,18 +66,31 @@ CREATE TABLE IF NOT EXISTS Servico (
 );
 
 -- =========================================================================
--- 5. TABELA PRODUTO (Entidade Forte)
+--  TABELA CATEGORIA (Entidade Forte)
+-- =========================================================================
+
+CREATE TABLE IF NOT EXISTS Categoria (
+    idCategoria INT UNSIGNED NOT NULL PRIMARY KEY,
+    nome VARCHAR(125) NOT NULL,
+);
+
+-- =========================================================================
+--  TABELA PRODUTO (Entidade Forte)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Produto (
     idProduto INT UNSIGNED NOT NULL PRIMARY KEY,
     nome VARCHAR(125) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL CHECK (preco >= 0),
-    categoria VARCHAR(20) NOT NULL
+    idCategoria INT UNSIGNED NOT NULL,
+
+    CONSTRAINT fk_categoria_produto
+        FOREIGN KEY (idCategoria)
+        REFERENCES Categoria(idCategoria)
 );
 
 -- =========================================================================
--- 6. TABELA JAZIGO (Lado N da Unidade Regional)
+--  TABELA JAZIGO (Lado N da Unidade Regional)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Jazigo (
@@ -94,7 +107,7 @@ CREATE TABLE IF NOT EXISTS Jazigo (
 );
 
 -- =========================================================================
--- 7. TABELA FALECIDO (Relaciona-se com Cliente e Jazigo)
+--  TABELA FALECIDO (Relaciona-se com Cliente e Jazigo)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Falecido (
@@ -116,7 +129,7 @@ CREATE TABLE IF NOT EXISTS Falecido (
 );
 
 -- =========================================================================
--- 8. TABELA ASSOCIATIVA: EXECUÇÃO (Relacionamento M:N - Funcionário e Serviço)
+--  TABELA ASSOCIATIVA: EXECUÇÃO (Relacionamento M:N - Funcionário e Serviço)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Execucao (
@@ -137,7 +150,7 @@ CREATE TABLE IF NOT EXISTS Execucao (
 );
 
 -- =========================================================================
--- 9. TABELA ASSOCIATIVA: CONTRATA (Relacionamento M:N - Cliente e Serviço)
+--  TABELA ASSOCIATIVA: CONTRATA (Relacionamento M:N - Cliente e Serviço)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Contrata (
@@ -158,7 +171,7 @@ CREATE TABLE IF NOT EXISTS Contrata (
 );
 
 -- =========================================================================
--- 10. TABELA ASSOCIATIVA: COMPRA (Relacionamento M:N - Cliente e Produto)
+--  TABELA ASSOCIATIVA: COMPRA (Relacionamento M:N - Cliente e Produto)
 -- =========================================================================
 
 CREATE TABLE IF NOT EXISTS Compra (

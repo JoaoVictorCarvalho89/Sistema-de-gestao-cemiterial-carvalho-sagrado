@@ -39,18 +39,14 @@ SELECT
     s.idServico AS 'Código do Serviço',
     s.nome AS 'Serviço Contratado',
     s.preco AS 'Valor (R$)'
-FROM Cliente c
-INNER JOIN Contrata co ON c.idCliente = co.idCliente
-INNER JOIN Servico s   ON co.idServico = s.idServico;
+FROM Cliente c INNER JOIN Contrata co ON c.idCliente = co.idCliente INNER JOIN Servico s   ON co.idServico = s.idServico;
 
 SELECT 
 	f.idFuncionario AS 'Código do Funcionario',
     f.nome AS 'Nome Funcionario',
     s.idServico AS 'Código do Serviço',
     s.nome AS 'Nome do Serviço'
-FROM Funcionario f
-INNER JOIN Execucao ex ON f.idFuncionario = ex.idFuncionario
-INNER JOIN Servico s ON ex.idServico = s.idServico;
+FROM Funcionario f INNER JOIN Execucao ex ON f.idFuncionario = ex.idFuncionario INNER JOIN Servico s ON ex.idServico = s.idServico;
 
 SELECT 
     f.idFalecido AS 'Código do Falecido',
@@ -58,5 +54,4 @@ SELECT
     j.idJazigo AS 'Código do Jazigo',
     j.numero AS 'Número do Jazigo',
     j.tipo AS 'Tipo de Jazigo'
-FROM Falecido f
-INNER JOIN Jazigo j ON f.idJazigo = j.idJazigo;
+FROM Falecido f INNER JOIN Jazigo j ON f.idJazigo = j.idJazigo;
