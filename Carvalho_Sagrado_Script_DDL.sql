@@ -72,6 +72,8 @@ CREATE TABLE IF NOT EXISTS Servico (
 CREATE TABLE IF NOT EXISTS Categoria (
     idCategoria INT UNSIGNED NOT NULL PRIMARY KEY,
     nome VARCHAR(125) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    data_criacao DATE NOT NULL DEFAULT (CURRENT_DATE)
 );
 
 -- =========================================================================
